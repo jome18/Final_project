@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.forms import ModelForm
 
 # Create your models here.
 
 
 class User (AbstractUser):
-    pass
+    Listen = models.ManyToManyField('Tagebuch', blank=True, related_name="rel_Listen")
 
 
 class Tagebuch(models.Model):
-    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="pollenDaten")
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="pollenDaten")
     datetime_stamp = models.DateTimeField(auto_now_add=True)
     date_stamp = models.DateField(auto_now_add=True)
     Abies = models.FloatField(max_length=20, default=0)
@@ -57,3 +58,8 @@ class Tagebuch(models.Model):
 
 def __str__(self):
 		return f"{self.Abies}, {self.Acer}, {self.Aesculus}, {self.Alnus}, {self.Ambrosia}, {self.Artemisia}, {self.Asteraceae}, {self.Betula}, {self.Carpinus}, {self.Castanea}, {self.Chenopodium}, {self.Corylus}, {self.Cruciferae}, {self.Cyperaceae}, {self.Erica}, {self.Fagus}, {self.Fraxinus}, {self.Fungus}, {self.Galium}, {self.Humulus}, {self.Impatiens}, {self.Juglans}, {self.Larix}, {self.Picea}, {self.Pinaceae}, {self.Pinus}, {self.Plantago}, {self.Platanus}, {self.Poaceae}, {self.Populus}, {self.Quercus}, {self.Quercus_ilex}, {self.Rumex}, {self.Salix}, {self.Sambucus}, {self.Secale}, {self.Taxus}, {self.Tilia}, {self.Ulmus}, {self.Urtica}, {self.Varia}"
+
+class TagebuchForm(ModelForm):
+    class Meta:
+        model = Tagebuch
+        exclude = ['datetime_stamp', 'date_stamp']

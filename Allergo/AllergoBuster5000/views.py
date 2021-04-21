@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
-from .models import User
+from .models import *
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -21,7 +21,7 @@ def index(request):
         return HttpResponseRedirect(reverse("login"))
 
 @csrf_exempt
-#@login_required
+@login_required
 def saveData(request):
     # Composing a new email must be via POST
     pollenDict = { "Abies": 0, "Acer": 0, "Aesculus": 0, "Alnus": 0, "Ambrosia": 0, "Artemisia": 0, "Asteraceae": 0, "Betula": 0, "Carpinus": 0, "Castanea": 0, "Chenopodium": 0, "Corylus": 0, "Cruciferae": 0, "Cyperaceae": 0, "Erica": 0, "Fagus": 0, "Fraxinus": 0, "Fungus": 0, "Galium": 0, "Humulus": 0, "Impatiens": 0, "Juglans": 0, "Larix": 0, "Picea": 0, "Pinaceae": 0, "Pinus": 0, "Plantago": 0, "Platanus": 0, "Poaceae": 0, "Populus": 0, "Quercus": 0, "Quercus ilex": 0, "Rumex": 0, "Salix": 0, "Sambucus": 0, "Secale": 0, "Taxus": 0, "Tilia": 0, "Ulmus": 0, "Urtica": 0, "Varia": 0 }
@@ -35,7 +35,20 @@ def saveData(request):
         for y in data:
             if (x == y["name"]):
                 pollenDict[x] = y["measure"]
+  
+    pollenDay = TagebuchForm()
+    ##pollenDay(**pollenDict)    
+    pollenDay.__dict__.update(pollenDict)
+    pollenDay.Quercus_ilex = pollenDict["Quercus ilex"]
+    pollenDay.user = request.user
+    print(pollenDay.user)
+    print(request.user)
     
+    
+    #print(pollenDay)
+    pollenDay.save()
+    print("Entry created")
+#TagebuchForm(pollenDict); 
 #    for x in pollenDict:
 #        print(x)
 #        print(pollenDict[x])
@@ -97,5 +110,6 @@ def register(request):
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
+        #return render("index")
     else:
         return render(request, "AllergoBuster5000/register.html")
