@@ -1,0 +1,54 @@
+{% extends "AllergoBuster5000/layout.html" %}
+{% load static %}
+{% block body %}
+<h1>Pollenflug</h1>
+<br>
+
+<div class="container">
+	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+		<div id="cont1" class="col">
+			<div class="card border-secondary mb-3" style="max-width: 18rem; cursor: pointer;" onclick="showLocation(this)">
+				<div class="card-header">Header</div>
+				<div class="card-body text-secondary">
+					<h6 class="card-title">Pollen pro m³ </br><span  style="font-size:11px"> gemessen seit 00:00 Uhr</span></h6>
+					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p!-->
+					<table class="table">
+						<tbody>
+							<tr>
+								<td onmouseover="translateMeLat(this)" onmouseout="translateMeDe(this)"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td onmouseover="translateMeLat(this)" onmouseout="translateMeDe(this)"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td onmouseover="translateMeLat(this)" onmouseout="translateMeDe(this)"></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+		<div id="cont2" class="col">
+			<div class="card border-secondary mb-3" style="max-width: 18rem">
+				<div class="card-header" onmouseover="translateMeLat(this)" onmouseout="translateMeDe(this)">Pollenname</div>
+				<div class="card-body text-secondary">
+					<h6 class="card-title">Uhrzeit | Pollen pro m³</h6>
+					<ul class="list-group">
+						<li id="li1" style="display:none" class="list-group-item d-flex justify-content-between align-items-center">
+						<span>Gesamt</span><span class="badge bg-secondary rounded-pill">14</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>   
+{% endblock %}
