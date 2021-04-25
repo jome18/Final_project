@@ -1,6 +1,9 @@
 {% extends "AllergoBuster5000/layout.html" %}
 
 {% block body %}
+{% block script %}
+	<script>document.getElementById('btn1').style.display = 'none';</script>
+{% endblock %}
     </br>
     <h2>Register</h2>
     </br>
@@ -30,5 +33,4 @@
     </form>
     </br>
     Already have an account? <a href="{% url 'login' %}">Log In here.</a>
-</br id="cont1">
 {% endblock %}

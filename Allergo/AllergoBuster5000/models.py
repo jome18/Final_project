@@ -1,18 +1,27 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 from django.forms import ModelForm
+from django.forms.widgets import Select
 
 # Create your models here.
 
+CATEGORIES = [
+        ('SS', 'Sehr Schlecht'),
+        ('SC', 'Schlecht'),
+        ('NM', 'Normal'),
+        ('GT', 'Gut'),
+        ('SG', 'Sehr Gut'),
+    ]
+
 
 class User (AbstractUser):
-    Listen = models.ManyToManyField('Tagebuch', blank=True, related_name="rel_Listen")
-
+    pass
 
 class Tagebuch(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="pollenDaten")
     datetime_stamp = models.DateTimeField(auto_now_add=True)
     date_stamp = models.DateField(auto_now_add=True)
+    feeling = models.CharField(max_length=2, choices=CATEGORIES, default="NM")
     Abies = models.FloatField(max_length=20, default=0)
     Acer = models.FloatField(max_length=20, default=0)
     Aesculus = models.FloatField(max_length=20, default=0)
@@ -56,10 +65,14 @@ class Tagebuch(models.Model):
     Varia = models.FloatField(max_length=20, default=0)    
 
 
-def __str__(self):
-		return f"{self.Abies}, {self.Acer}, {self.Aesculus}, {self.Alnus}, {self.Ambrosia}, {self.Artemisia}, {self.Asteraceae}, {self.Betula}, {self.Carpinus}, {self.Castanea}, {self.Chenopodium}, {self.Corylus}, {self.Cruciferae}, {self.Cyperaceae}, {self.Erica}, {self.Fagus}, {self.Fraxinus}, {self.Fungus}, {self.Galium}, {self.Humulus}, {self.Impatiens}, {self.Juglans}, {self.Larix}, {self.Picea}, {self.Pinaceae}, {self.Pinus}, {self.Plantago}, {self.Platanus}, {self.Poaceae}, {self.Populus}, {self.Quercus}, {self.Quercus_ilex}, {self.Rumex}, {self.Salix}, {self.Sambucus}, {self.Secale}, {self.Taxus}, {self.Tilia}, {self.Ulmus}, {self.Urtica}, {self.Varia}"
+    def __str__(self):
+        return f"{self.user}, {self.datetime_stamp}, {self.date_stamp}, {self.feeling}, {self.Abies}, {self.Acer}, {self.Aesculus}, {self.Alnus}, {self.Ambrosia}, {self.Artemisia}, {self.Asteraceae}, {self.Betula}, {self.Carpinus}, {self.Castanea}, {self.Chenopodium}, {self.Corylus}, {self.Cruciferae}, {self.Cyperaceae}, {self.Erica}, {self.Fagus}, {self.Fraxinus}, {self.Fungus}, {self.Galium}, {self.Humulus}, {self.Impatiens}, {self.Juglans}, {self.Larix}, {self.Picea}, {self.Pinaceae}, {self.Pinus}, {self.Plantago}, {self.Platanus}, {self.Poaceae}, {self.Populus}, {self.Quercus}, {self.Quercus_ilex}, {self.Rumex}, {self.Salix}, {self.Sambucus}, {self.Secale}, {self.Taxus}, {self.Tilia}, {self.Ulmus}, {self.Urtica}, {self.Varia}"
 
 class TagebuchForm(ModelForm):
     class Meta:
         model = Tagebuch
-        exclude = ['datetime_stamp', 'date_stamp']
+        fields = ['feeling']
+        widgets = {
+            'feeling': Select(attrs={'class':'form-control'}),
+        }
+       

@@ -9,6 +9,29 @@
 
 <h1>Pollenflug</h1>
 <br>
+{% if user.is_authenticated %}
+<!-- div class="form-group", style="width: 30%" >
+    <form id="btn1">
+        {% for field in form %}
+            </br>
+            {{ field.label }}
+            :</br></br>
+            {{ field }}
+        {% endfor %}
+        </br>
+        <input onclick="saveData()" type="submit" value="Save Data" class="btn btn-secondary">
+    </form>
+</div>
+<br !-->
+
+<select id="userSelect" class="form-select" aria-label="Default select example">
+	<option selected>Open this select menu</option>
+	<option value="1">One</option>
+	<option value="2">Two</option>
+	<option value="3">Three</option>
+  </select>
+  <button onclick="saveData()" id="btn1" type="button" class="btn btn-secondary btn-sm">Save Data to Profile</button>
+{% endif %}
 
 <div class="container">
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">

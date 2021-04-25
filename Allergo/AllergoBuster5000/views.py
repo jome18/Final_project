@@ -1,14 +1,15 @@
+from django.db.models.fields import PositiveSmallIntegerField
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import json
-from django import http
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.db import IntegrityError
-from .models import *
+from django import http
 from django.views.decorators.csrf import csrf_exempt
-
+from django.urls import reverse
+from .models import *
+from django.db import IntegrityError
+from datetime import datetime
 
 
 # Create your views here.
@@ -16,48 +17,41 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
 
 #    if request.user.is_authenticated:
-        return render(request, "AllergoBuster5000/index.html")
+        return render(request, "AllergoBuster5000/index.html", {
+            "form": TagebuchForm
+        })
 #    else:
         return HttpResponseRedirect(reverse("login"))
 
 @csrf_exempt
 @login_required
 def saveData(request):
-    # Composing a new email must be via POST
-    pollenDict = { "Abies": 0, "Acer": 0, "Aesculus": 0, "Alnus": 0, "Ambrosia": 0, "Artemisia": 0, "Asteraceae": 0, "Betula": 0, "Carpinus": 0, "Castanea": 0, "Chenopodium": 0, "Corylus": 0, "Cruciferae": 0, "Cyperaceae": 0, "Erica": 0, "Fagus": 0, "Fraxinus": 0, "Fungus": 0, "Galium": 0, "Humulus": 0, "Impatiens": 0, "Juglans": 0, "Larix": 0, "Picea": 0, "Pinaceae": 0, "Pinus": 0, "Plantago": 0, "Platanus": 0, "Poaceae": 0, "Populus": 0, "Quercus": 0, "Quercus ilex": 0, "Rumex": 0, "Salix": 0, "Sambucus": 0, "Secale": 0, "Taxus": 0, "Tilia": 0, "Ulmus": 0, "Urtica": 0, "Varia": 0 }
+    pollenDict = {"feeling": "NM", "Abies": 0, "Acer": 0, "Aesculus": 0, "Alnus": 0, "Ambrosia": 0, "Artemisia": 0, "Asteraceae": 0, "Betula": 0, "Carpinus": 0, "Castanea": 0, "Chenopodium": 0, "Corylus": 0, "Cruciferae": 0, "Cyperaceae": 0, "Erica": 0, "Fagus": 0, "Fraxinus": 0, "Fungus": 0, "Galium": 0, "Humulus": 0, "Impatiens": 0, "Juglans": 0, "Larix": 0, "Picea": 0, "Pinaceae": 0, "Pinus": 0, "Plantago": 0, "Platanus": 0, "Poaceae": 0, "Populus": 0, "Quercus": 0, "Quercus_ilex": 0, "Rumex": 0, "Salix": 0, "Sambucus": 0, "Secale": 0, "Taxus": 0, "Tilia": 0, "Ulmus": 0, "Urtica": 0, "Varia": 0 }
 
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
-    # Check recipient emails
-    print("Guten TagS")
+    
     data = json.loads(request.body)
     for x in pollenDict:
         for y in data:
             if (x == y["name"]):
                 pollenDict[x] = y["measure"]
-  
-    pollenDay = TagebuchForm()
-    ##pollenDay(**pollenDict)    
-    pollenDay.__dict__.update(pollenDict)
-    pollenDay.Quercus_ilex = pollenDict["Quercus ilex"]
-    pollenDay.user = request.user
-    print(pollenDay.user)
-    print(request.user)
     
-    
-    #print(pollenDay)
-    pollenDay.save()
-    print("Entry created")
-#TagebuchForm(pollenDict); 
-#    for x in pollenDict:
-#        print(x)
-#        print(pollenDict[x])
+    for y in data:
+        if (y["name"] == "Quercus ilex"):
+            pollenDict["Quercus_ilex"] = y["measure"]
+    print(pollenDict["Quercus_ilex"])
 
-#    for x in data:
- #       print(x["name"])
-  #      print(x["measure"])
-
-    return JsonResponse({"none": "POST arrived."}, status=200)
+    if (Tagebuch.objects.filter(user=request.user, date_stamp=datetime.now()).order_by("-datetime_stamp").first()):
+        getUserTagebuch = Tagebuch.objects.filter(user=request.user, date_stamp=datetime.now()).order_by("-datetime_stamp").first()
+    else:
+        getUserTagebuch = Tagebuch.objects.create(user=request.user, date_stamp=datetime.now())
+    for k in pollenDict.keys():
+        setattr(getUserTagebuch, k, pollenDict[k])
+    getUserTagebuch.save()
+    test = Tagebuch.objects.filter(user=request.user, date_stamp=datetime.now()).order_by("-datetime_stamp").first()
+    print(test.Varia)
+    return JsonResponse({"Message": "Data Saved"}, status=200)
 
 
 #---------------------------------------------------------------

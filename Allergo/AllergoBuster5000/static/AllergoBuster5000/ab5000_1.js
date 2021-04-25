@@ -1,8 +1,9 @@
 var po = new Array();
 function saveData() {
 	//po.forEach( (it1) => console.log(it1));
-	console.log(po);
-	saveData1(po);
+	var test = document.getElementById("userSelect").value
+	console.log(test);
+	//saveData1(po);
 }
 
 

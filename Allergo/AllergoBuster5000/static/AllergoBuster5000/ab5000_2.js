@@ -8,7 +8,6 @@ fetch('/emails/100', {
 */
 
 function saveData1(poObjArray) {
-    console.log("Welcome to saveData1");
     fetch('/saveData', {
       method: 'POST',
       body: JSON.stringify(poObjArray)
@@ -16,7 +15,8 @@ function saveData1(poObjArray) {
   .then(response => response.json())
   .then(result => {
      // Print result
-      console.log(result);
+      console.log(result.Message);
+      document.getElementById("btn1").innerHTML = result.Message;
   })
-  console.log("saveData1 has finished.");
+  
 }
