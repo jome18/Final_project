@@ -17,11 +17,9 @@ from datetime import datetime
 def index(request):
 
 #    if request.user.is_authenticated:
-        return render(request, "AllergoBuster5000/index.html", {
-            "form": TagebuchForm
-        })
+        return render(request, "AllergoBuster5000/index.html")
 #    else:
-        return HttpResponseRedirect(reverse("login"))
+#        return HttpResponseRedirect(reverse("login"))
 
 @csrf_exempt
 @login_required
@@ -50,7 +48,7 @@ def saveData(request):
         setattr(getUserTagebuch, k, pollenDict[k])
     getUserTagebuch.save()
     test = Tagebuch.objects.filter(user=request.user, date_stamp=datetime.now()).order_by("-datetime_stamp").first()
-    print(test.Varia)
+    print(test.feeling)
     return JsonResponse({"Message": "Data Saved"}, status=200)
 
 

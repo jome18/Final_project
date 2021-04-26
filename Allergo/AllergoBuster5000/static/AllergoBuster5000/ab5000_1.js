@@ -1,9 +1,9 @@
 var po = new Array();
 function saveData() {
 	//po.forEach( (it1) => console.log(it1));
-	var test = document.getElementById("userSelect").value
-	console.log(test);
-	//saveData1(po);
+	var test = document.getElementById("userSelect").value;
+	po.push(new pollen("feeling", test));
+	saveData1(po);
 }
 
 
@@ -58,6 +58,6 @@ function my_Api4(inItem) {
 		})	
 		.catch(error => {console.log('Error:', error)}
 	)
-	document.getElementById('btn1').style.display = 'block';
+	document.getElementById('div1').style.display = 'block';
 	return false;
 }

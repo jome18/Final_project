@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	document.getElementById('cont1').style.display = 'none';
 	document.getElementById('cont2').style.display = 'none';
-	document.getElementById('btn1').style.display = 'none';
+//	document.getElementById('userSelect').style.display = 'none';
 	
 	var d = new Date();
 	var h1 = document.getElementsByTagName('H1')[0];

@@ -8,30 +8,33 @@
 {% endblock %}
 
 <h1>Pollenflug</h1>
-<br>
-{% if user.is_authenticated %}
-<!-- div class="form-group", style="width: 30%" >
-    <form id="btn1">
-        {% for field in form %}
-            </br>
-            {{ field.label }}
-            :</br></br>
-            {{ field }}
-        {% endfor %}
-        </br>
-        <input onclick="saveData()" type="submit" value="Save Data" class="btn btn-secondary">
-    </form>
-</div>
-<br !-->
+</br>
 
-<select id="userSelect" class="form-select" aria-label="Default select example">
-	<option selected>Open this select menu</option>
-	<option value="1">One</option>
-	<option value="2">Two</option>
-	<option value="3">Three</option>
-  </select>
-  <button onclick="saveData()" id="btn1" type="button" class="btn btn-secondary btn-sm">Save Data to Profile</button>
+{% if user.is_authenticated %}
+<div id="div1" style="display:none">
+	<label for="userSelect">How do you feel?:</label>
+	<br></br>
+	<select id="userSelect" style="width:20%" class="form-select">
+		<option value="NM">Normal</option>
+		<!-- option selected>Normal</option !-->
+		<option value="SS">Sehr Schlecht</option>
+		<option value="SC">Schlecht</option>
+		<!--option value="NM">Normal</option !-->
+		<option value="GT">Gut</option>
+		<option value="SG">Sehr Gut</option>
+	</select>
+	<br>
+	<button onclick="saveData()" id="btn1" type="button" class="btn btn-secondary btn-sm">Save Data to Profile</button>
+	<br>
+</div>
+<br>
+	<script>
+		// document.getElementById('div1').style.display = 'block';
+		//	document.getElementById('userSelect').style.display = 'block';
+	</script>
 {% endif %}
+
+
 
 <div class="container">
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
@@ -79,5 +82,6 @@
 			</div>
 		</div>
 	</div>
-</div>   
+</div>
+<div id="div1" style="display:none"/>
 {% endblock %}
