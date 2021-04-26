@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('index', views.index, name='index'),
     path('saveData', views.saveData, name='saveData'),
+    path('meine_pollen', views.myPollen, name='myPollen'),
     path('login', views.login_view, name='login'),
     path('register', views.register, name='register'),
     path('logout', views.logout_view, name='logout')

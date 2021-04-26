@@ -17,6 +17,26 @@ function saveData1(poObjArray) {
      // Print result
       console.log(result.Message);
       document.getElementById("btn1").innerHTML = result.Message;
-  })
-  
+  })  
+}
+
+
+
+function fillArray(){
+  a = ['giraffes', 'orangutans', 'apes'];
+  b = [20, 14, 23];
+  plotGraph(a, b);
+}
+
+
+function plotGraph(a, b){
+  var data = [
+    {
+      x: a,
+      y: b,
+      type: 'bar'
+    }
+  ];
+
+  Plotly.newPlot('myDiv', data);
 }
