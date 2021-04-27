@@ -21,6 +21,26 @@ function saveData1(poObjArray) {
 }
 
 
+function getData() {
+  fetch('/meine_pollen', {
+    method: 'POST'
+  })
+.then(response => response.json())
+.then(result => {
+    var a = new Array();
+    var b = new Array();
+    var c;
+    for (i in result) {
+      a.push(i);
+      b.push(result[i]);
+    }
+    a.shift();
+    c = b.shift();
+    plotGraph(a, b, c);
+  }); 
+}
+
+
 
 function fillArray(){
   a = ['giraffes', 'orangutans', 'apes'];
@@ -29,7 +49,7 @@ function fillArray(){
 }
 
 
-function plotGraph(a, b){
+function plotGraph(a, b, c){
   var data = [
     {
       x: a,
@@ -37,6 +57,27 @@ function plotGraph(a, b){
       type: 'bar'
     }
   ];
+  var layout = {
+    title: c,
+    font:{
+      family: 'Raleway, sans-serif'
+    },
+    showlegend: false,
+    xaxis: {
+      tickangle: -45
+    },
+    yaxis: {
+      zeroline: false,
+      gridwidth: 2
+    },
+    bargap :0.05
+  };
 
-  Plotly.newPlot('myDiv', data);
+  Plotly.newPlot('myGraph', data, layout);
+
+  document.getElementById("div1").style.display = "none";
+  document.getElementById("withGraphOut_0").style.display = "none";
+  document.getElementById("withGraphOut_1").style.display = "none";
+	document.getElementsByTagName('H1')[0].innerHTML = "Meine Pollen";
+
 }

@@ -1,4 +1,5 @@
 from django.db.models.fields import PositiveSmallIntegerField
+from django.forms.models import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import json
@@ -24,7 +25,22 @@ def index(request):
 @csrf_exempt
 @login_required
 def myPollen(request):
-    return render(request, "AllergoBuster5000/myPollen.html")
+    pollenDict = {"feeling": "", "Abies": 0, "Acer": 0, "Aesculus": 0, "Alnus": 0, "Ambrosia": 0, "Artemisia": 0, "Asteraceae": 0, "Betula": 0, "Carpinus": 0, "Castanea": 0, "Chenopodium": 0, "Corylus": 0, "Cruciferae": 0, "Cyperaceae": 0, "Erica": 0, "Fagus": 0, "Fraxinus": 0, "Fungus": 0, "Galium": 0, "Humulus": 0, "Impatiens": 0, "Juglans": 0, "Larix": 0, "Picea": 0, "Pinaceae": 0, "Pinus": 0, "Plantago": 0, "Platanus": 0, "Poaceae": 0, "Populus": 0, "Quercus": 0, "Quercus_ilex": 0, "Rumex": 0, "Salix": 0, "Sambucus": 0, "Secale": 0, "Taxus": 0, "Tilia": 0, "Ulmus": 0, "Urtica": 0, "Varia": 0 }
+    data = Tagebuch.objects.filter(user=request.user, feeling="NM")
+    for i in data:
+        for j in i.__dict__:
+            l = 1
+            for k in pollenDict:
+                if (k == j):
+                    if (l > 1):
+                        pollenDict[k] = (pollenDict[k] + i.__dict__[j]) / 2
+                    else:
+                        pollenDict[k] = (pollenDict[k] + i.__dict__[j])
+                    l = l + 1
+    return JsonResponse(pollenDict)        
+#    return render(request, "AllergoBuster5000/myPollen.html")
+
+
 
 @csrf_exempt
 @login_required

@@ -5,10 +5,15 @@
 	<script src="{% static 'AllergoBuster5000/ab5000.js' %}"></script>
 	<script src="{% static 'AllergoBuster5000/ab5000_1.js' %}"></script>
 	<script src="{% static 'AllergoBuster5000/ab5000_2.js' %}"></script>
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 {% endblock %}
 
 <h1>Pollenflug</h1>
 </br>
+<div id="Graphs" style="display:block">
+	<div id='myGraph'></div>
+</div>
+
 
 {% if user.is_authenticated %}
 <div id="div1" style="display:none">
@@ -36,7 +41,7 @@
 
 
 
-<div class="container">
+<div id="withGraphOut_0" class="container">
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 		<div id="cont1" class="col">
 			<div class="card border-secondary mb-3" style="max-width: 18rem; cursor: pointer;" onclick="showLocation(this)">
@@ -66,7 +71,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div id="withGraphOut_1" class="container">
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 		<div id="cont2" class="col">
 			<div class="card border-secondary mb-3" style="max-width: 18rem">
@@ -84,4 +89,5 @@
 	</div>
 </div>
 <div id="div1" style="display:none"/>
+
 {% endblock %}
