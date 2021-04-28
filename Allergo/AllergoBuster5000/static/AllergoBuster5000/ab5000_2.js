@@ -1,12 +1,3 @@
-/*
-fetch('/emails/100', {
-  method: 'PUT',
-  body: JSON.stringify({
-      archived: true
-  })
-})
-*/
-
 function saveData1(poObjArray) {
     fetch('/saveData', {
       method: 'POST',
@@ -29,10 +20,14 @@ function getData() {
 .then(result => {
     var a = new Array();
     var b = new Array();
-    var c;
+    var c;        
     for (i in result) {
-      a.push(i);
-      b.push(result[i]);
+      for (j in result[i]) {
+        a.push(j);
+        console.log(j);
+        b.push(result[i][j]);
+        console.log(result[i][j]);
+      }
     }
     a.shift();
     c = b.shift();
