@@ -20,8 +20,7 @@ function getData() {
 .then(result => {
     var a = new Array();
     var b = new Array();
-    var c;
-    var d = new Array();        
+    var c;        
     nonGraphOff();
     for (i in result) {
       for (j in result[i]) {
@@ -32,33 +31,16 @@ function getData() {
       }
       a.shift();
       c = b.shift();
-      d.push(makeDataObj(a, b, c));
+      plotGraph(a, b, c);
       a = [];
       b = [];
       c = "";
     }
-    console.log(d[0]);
-    f = new Array(2);
-    f[0] = d[0];
-    f[1] = d[1];
-    var layout = {barmode: 'group'};
-    Plotly.newPlot("SC", f, layout);
   }); 
   return true;
 }
 
-function makeDataObj(a, b, c){
-  
-  var trace1 = [
-    {
-      x: a,
-      y: b,
-      name: c,
-      type: 'bar'
-    }
-  ];
-  return trace1;
-}
+
 
 function nonGraphOff(){
   document.getElementById("div1").style.display = "none";
@@ -80,4 +62,32 @@ function translateFeeling(name){
       name = categories[i];
     }
   return name;
+}
+
+function plotGraph(a, b, c){
+  var data = [
+    {
+      x: a,
+      y: b,
+      type: 'bar'
+    }
+  ];
+  var layout = {
+    title: translateFeeling(c),
+    font:{
+      family: 'Raleway, sans-serif'
+    },
+    showlegend: false,
+    xaxis: {
+      tickangle: -45
+    },
+    yaxis: {
+      zeroline: false,
+      gridwidth: 2
+    },
+    bargap :0.05
+  };
+
+  Plotly.newPlot(c, data, layout);
+
 }
