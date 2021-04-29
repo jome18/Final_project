@@ -21,6 +21,7 @@ function getData() {
     var a = new Array();
     var b = new Array();
     var c;        
+    nonGraphOff();
     for (i in result) {
       for (j in result[i]) {
         a.push(j);
@@ -28,21 +29,40 @@ function getData() {
         b.push(result[i][j]);
         console.log(result[i][j]);
       }
+      a.shift();
+      c = b.shift();
+      plotGraph(a, b, c);
+      a = [];
+      b = [];
+      c = "";
     }
-    a.shift();
-    c = b.shift();
-    plotGraph(a, b, c);
   }); 
+  return true;
 }
 
 
 
-function fillArray(){
-  a = ['giraffes', 'orangutans', 'apes'];
-  b = [20, 14, 23];
-  plotGraph(a, b);
+function nonGraphOff(){
+  document.getElementById("div1").style.display = "none";
+  document.getElementById("withGraphOut_0").style.display = "none";
+  document.getElementById("withGraphOut_1").style.display = "none";
+  document.getElementsByTagName('H1')[0].innerHTML = "Meine Pollen";
 }
 
+function translateFeeling(name){
+  categories = {
+    'SS': 'Sehr Schlecht',
+    'SC': 'Schlecht',
+    'NM': 'Normal',
+    'GT': 'Gut',
+    'SG': 'Sehr Gut'
+  }
+  for (i in categories)
+    if (name == i){
+      name = categories[i];
+    }
+  return name;
+}
 
 function plotGraph(a, b, c){
   var data = [
@@ -53,7 +73,7 @@ function plotGraph(a, b, c){
     }
   ];
   var layout = {
-    title: c,
+    title: translateFeeling(c),
     font:{
       family: 'Raleway, sans-serif'
     },
@@ -68,11 +88,6 @@ function plotGraph(a, b, c){
     bargap :0.05
   };
 
-  Plotly.newPlot('myGraph', data, layout);
-
-  document.getElementById("div1").style.display = "none";
-  document.getElementById("withGraphOut_0").style.display = "none";
-  document.getElementById("withGraphOut_1").style.display = "none";
-	document.getElementsByTagName('H1')[0].innerHTML = "Meine Pollen";
+  Plotly.newPlot(c, data, layout);
 
 }
