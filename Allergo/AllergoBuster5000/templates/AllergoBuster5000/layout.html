@@ -15,7 +15,7 @@
               <ul class="navbar-nav mr-auto">
 				{% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:getData()">Meine Pollen</a>
+                        <a class="nav-link" href="javascript:doGetData()">Meine Pollen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>

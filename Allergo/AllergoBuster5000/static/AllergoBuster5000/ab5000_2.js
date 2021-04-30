@@ -12,53 +12,39 @@ function saveData1(poObjArray) {
 }
 
 
-function getData() {
-  fetch('/meine_pollen', {
+async function getData() {
+  const response = await fetch('/meine_pollen', {
     method: 'POST'
   })
-.then(response => response.json())
-.then(result => {
-    var a = new Array();
-    var b = new Array();
-    var c;
-    var d = new Array();        
-    nonGraphOff();
-    for (i in result) {
-      for (j in result[i]) {
-        a.push(j);
-        console.log(j);
-        b.push(result[i][j]);
-        console.log(result[i][j]);
-      }
-      a.shift();
-      c = b.shift();
-      d.push(makeDataObj(a, b, c));
-      a = [];
-      b = [];
-      c = "";
-    }
-    console.log(d[0]);
-    f = new Array(2);
-    f[0] = d[0];
-    f[1] = d[1];
-    var layout = {barmode: 'group'};
-    Plotly.newPlot("SC", f, layout);
-  }); 
-  return true;
+  const result = await response.json();
+  return result;
 }
 
-function makeDataObj(a, b, c){
-  
-  var trace1 = [
-    {
-      x: a,
-      y: b,
-      name: c,
-      type: 'bar'
-    }
-  ];
-  return trace1;
-}
+function doGetData(){
+  var d = new Array;
+  nonGraphOff();
+  getData().then(result => {
+      var a = new Array();
+      var b = new Array();
+      var c;
+      for (i in result) {
+        for (j in result[i]) {
+          a.push(j);
+          b.push(result[i][j]);
+        }
+        a.shift();
+        c = b.shift();
+        d.push(a,);
+        d.push(b);
+        d.push(c);
+        a = [];
+        b = [];
+        c = "";
+      }
+      plotGraph(d);   
+    });
+    return true;
+  }  
 
 function nonGraphOff(){
   document.getElementById("div1").style.display = "none";
@@ -80,4 +66,56 @@ function translateFeeling(name){
       name = categories[i];
     }
   return name;
+}
+
+function plotGraph(d){
+  for (i in d[0]){
+    if (d[0][i] == "Quercus_ilex"){ d[0][i] = "Quercus ilex" } 
+    d[0][i] = translatePolle(d[0][i], "ld");
+  }
+  
+  var trace1 = {
+    x: d[0],
+    y: d[1],
+    name: translateFeeling(d[2]),
+    type: 'bar'
+  };
+  
+  if (d.length > 3) {
+    for (i in d[3]){
+      if (d[3][i] == "Quercus_ilex"){ d[3][i] = "Quercus ilex" } 
+      d[3][i] = translatePolle(d[3][i], "ld"); 
+    }    
+    var trace2 = {
+      x: d[3],
+      y: d[4],
+      name: translateFeeling(d[5]),
+      type: 'bar'
+    };
+  }
+  
+  if (d.length > 6){
+    for (i in d[6]){
+      if (d[6][i] == "Quercus_ilex"){ d[6][i] = "Quercus ilex" } 
+      d[6][i] = translatePolle(d[6][i], "ld"); 
+    }    
+
+    var trace3 = {
+      x: d[6],
+      y: d[7],
+      name: translateFeeling(d[8]),
+      type: 'bar'
+    };
+  }
+
+  if (trace3 != undefined){
+    var data = [trace1, trace2, trace3];
+  } else if (trace2 != undefined){
+    var data = [trace1, trace2];
+  } else {
+    var data = [trace1];
+  }
+  
+  var layout = {barmode: 'group',  title: 'Durchschnittliche Pollen pro m³'};
+  Plotly.newPlot("SC", data, layout);
 }
