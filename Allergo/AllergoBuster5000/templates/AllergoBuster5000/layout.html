@@ -1,3 +1,5 @@
+<!-- template provided by CS50’s Web Programming with Python and JavaScript https://cs50.harvard.edu/web/2020/  -->
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -15,7 +17,8 @@
               <ul class="navbar-nav mr-auto">
 				{% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:doGetData()">Meine Pollen</a>
+                        <!-- a class="nav-link" href="javascript:doGetData()">Meine Pollen</a -->
+                        <a class="nav-link" href="javascript:doGetData()">My Pollen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>

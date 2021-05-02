@@ -1,0 +1,3 @@
+Any extension to unblock the Access-Control-Allow-Origin feature of your browser e.g.: 
+- CORS Unblock
+- Allow CORS: Access-Control-Allow-Origin

@@ -1,15 +1,4 @@
-function saveData1(poObjArray) {
-    fetch('/saveData', {
-      method: 'POST',
-      body: JSON.stringify(poObjArray)
-    })
-  .then(response => response.json())
-  .then(result => {
-     // Print result
-      console.log(result.Message);
-      document.getElementById("btn1").innerHTML = result.Message;
-  })  
-}
+//----------------------------Get Async Data from Controller / Model--------------------------------------------
 
 
 async function getData() {
@@ -20,7 +9,11 @@ async function getData() {
   return result;
 }
 
+//----------------------------Factor Data for Graphic--------------------------------------------
+
+
 function doGetData(){
+  history.pushState({Page: "Meine Pollen"}, "", "/Meine_Pollen");
   var d = new Array;
   nonGraphOff();
   getData().then(result => {
@@ -46,27 +39,20 @@ function doGetData(){
     return true;
   }  
 
+//----------------------------Clear Index Page--------------------------------------------
+
+
 function nonGraphOff(){
   document.getElementById("div1").style.display = "none";
   document.getElementById("withGraphOut_0").style.display = "none";
   document.getElementById("withGraphOut_1").style.display = "none";
-  document.getElementsByTagName('H1')[0].innerHTML = "Meine Pollen";
+//  document.getElementsByTagName('H1')[0].innerHTML = "Meine Pollen";
+  document.getElementsByTagName('H1')[0].innerHTML = "My Pollen";
 }
 
-function translateFeeling(name){
-  categories = {
-    'SS': 'Sehr Schlecht',
-    'SC': 'Schlecht',
-    'NM': 'Normal',
-    'GT': 'Gut',
-    'SG': 'Sehr Gut'
-  }
-  for (i in categories)
-    if (name == i){
-      name = categories[i];
-    }
-  return name;
-}
+
+//----------------------------Display Graphics--------------------------------------------
+
 
 function plotGraph(d){
   for (i in d[0]){
@@ -116,6 +102,7 @@ function plotGraph(d){
     var data = [trace1];
   }
   
-  var layout = {barmode: 'group',  title: 'Durchschnittliche Pollen pro m³'};
+  //var layout = {barmode: 'group',  title: 'Durchschnittliche Pollen pro m³'};
+  var layout = {barmode: 'group',  title: 'average pollen per m³'};
   Plotly.newPlot("SC", data, layout);
 }

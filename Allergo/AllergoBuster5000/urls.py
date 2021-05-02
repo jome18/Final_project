@@ -24,5 +24,6 @@ urlpatterns = [
     path('meine_pollen', views.myPollen, name='myPollen'),
     path('login', views.login_view, name='login'),
     path('register', views.register, name='register'),
-    path('logout', views.logout_view, name='logout')
+    path('logout', views.logout_view, name='logout'),
+    path("<str:name>", views.anyName, name="anyName")
 ]

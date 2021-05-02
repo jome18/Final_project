@@ -13,21 +13,18 @@ from django.db import IntegrityError
 from datetime import datetime
 
 
-# Create your views here.
 
 def index(request):
+    return render(request, "AllergoBuster5000/index.html")
 
-#    if request.user.is_authenticated:
-        return render(request, "AllergoBuster5000/index.html")
-#    else:
-#        return HttpResponseRedirect(reverse("login"))
+def anyName(request, name):
+    return render(request, "AllergoBuster5000/index.html")
 
 @csrf_exempt
 @login_required
 def myPollen(request):
     feelingArr = ["SS", "SC", "NM", "GT", "SG"]
     pollenDictDict = {}
- #   pollenDictArr = []
     for e in feelingArr:        
         pollenDict = {"feeling": "", "Abies": 0, "Acer": 0, "Aesculus": 0, "Alnus": 0, "Ambrosia": 0, "Artemisia": 0, "Asteraceae": 0, "Betula": 0, "Carpinus": 0, "Castanea": 0, "Chenopodium": 0, "Corylus": 0, "Cruciferae": 0, "Cyperaceae": 0, "Erica": 0, "Fagus": 0, "Fraxinus": 0, "Fungus": 0, "Galium": 0, "Humulus": 0, "Impatiens": 0, "Juglans": 0, "Larix": 0, "Picea": 0, "Pinaceae": 0, "Pinus": 0, "Plantago": 0, "Platanus": 0, "Poaceae": 0, "Populus": 0, "Quercus": 0, "Quercus_ilex": 0, "Rumex": 0, "Salix": 0, "Sambucus": 0, "Secale": 0, "Taxus": 0, "Tilia": 0, "Ulmus": 0, "Urtica": 0, "Varia": 0 }
         data = Tagebuch.objects.filter(user=request.user, feeling=e)
@@ -77,12 +74,11 @@ def saveData(request):
     for k in pollenDict.keys():
         setattr(getUserTagebuch, k, pollenDict[k])
     getUserTagebuch.save()
-#    test = Tagebuch.objects.filter(user=request.user, date_stamp=datetime.now()).order_by("-datetime_stamp").first()
-#    print(test.feeling)
     return JsonResponse({"Message": "Data Saved"}, status=200)
 
 
-#---------------------------------------------------------------
+
+#<!-- template provided by CS50’s Web Programming with Python and JavaScript https://cs50.harvard.edu/web/2020/  -->
 
 def login_view(request):
     if request.method == "POST":
