@@ -59,13 +59,23 @@ function plotGraph(d){
     if (d[0][i] == "Quercus_ilex"){ d[0][i] = "Quercus ilex" } 
     d[0][i] = translatePolle(d[0][i], "ld");
   }
-  
-  var trace1 = {
-    x: d[0],
-    y: d[1],
-    name: translateFeeling(d[2]),
-    type: 'bar'
-  };
+
+  if (d.length == 3) {
+    var trace1 = {
+      x: d[0],
+      y: d[1],
+      name: translateFeeling(d[2]),
+      type: 'bar'
+    };
+  }
+  else {
+    var trace1 = {
+      x: d[0],
+      y: d[1],
+      name: translateFeeling(d[2]),
+      type: 'bar'
+    };
+  }
   
   if (d.length > 3) {
     for (i in d[3]){
@@ -102,7 +112,7 @@ function plotGraph(d){
     var data = [trace1];
   }
   
+  var layout = {barmode: 'group',  title: 'average pollen per m³', showlegend: true};
   //var layout = {barmode: 'group',  title: 'Durchschnittliche Pollen pro m³'};
-  var layout = {barmode: 'group',  title: 'average pollen per m³'};
   Plotly.newPlot("SC", data, layout);
 }

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	history.pushState({Page: "index"}, "", "/index");
 	var d = new Date();
 	var h1 = document.getElementsByTagName('H1')[0];
-	h1.innerHTML = "Pollen Fligth - " + d.toLocaleString();
+	h1.innerHTML = "Pollen Flight - " + d.toLocaleString();
 	my_api3();
 });
 
