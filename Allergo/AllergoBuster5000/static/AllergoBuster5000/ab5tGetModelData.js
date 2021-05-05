@@ -112,7 +112,7 @@ function plotGraph(d){
     var data = [trace1];
   }
   
-  var layout = {barmode: 'group',  title: 'average pollen per m³', showlegend: true};
-  //var layout = {barmode: 'group',  title: 'Durchschnittliche Pollen pro m³'};
+//  var layout = {barmode: 'group',  title: 'average pollen per m³', showlegend: true};
+  var layout = {barmode: 'group',  title: 'Durchschnittliche Pollen pro m³'};
   Plotly.newPlot("SC", data, layout);
 }

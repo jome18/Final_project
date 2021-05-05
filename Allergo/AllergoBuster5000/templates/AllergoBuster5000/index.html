@@ -8,7 +8,7 @@
 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 {% endblock %}
 
-<h1>Pollen Flight</h1>
+<h1>Pollenflug</h1>
 </br>
 <div id="Graphs" style="display:block">
 	<div id='SC'></div>
@@ -18,15 +18,15 @@
 
 {% if user.is_authenticated %}
 <div id="div1" style="display:none">
-	<label for="userSelect">How do you feel?:</label>
+	<label for="userSelect">WIe geht's?:</label>
 	<br></br>
 	<select id="userSelect" style="width:20%" class="form-select">
 		<option value="NM">Normal</option>
 		<!-- option selected>Normal</option !-->
 		<!-- option value="SS">Sehr Schlecht</option -->
-		<option value="SC">Bad</option>
+		<option value="SC">Schlecht</option>
 		<!--option value="NM">Normal</option !-->
-		<option value="GT">Good</option>
+		<option value="GT">Gut</option>
 		<!-- option value="SG">Sehr Gut</option -->
 	</select>
 	<br>
@@ -43,7 +43,7 @@
 			<div class="card border-secondary mb-3" style="max-width: 18rem; cursor: pointer;" onclick="showLocation(this)">
 				<div class="card-header">Header</div>
 				<div class="card-body text-secondary">
-					<h6 class="card-title">Pollen per m³ </br><span  style="font-size:11px"> measured since 00:00</span></h6>
+					<h6 class="card-title">Pollen pro m³ </br><span  style="font-size:11px"> gemessen seit 00:00</span></h6>
 					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p!-->
 					<table class="table">
 						<tbody>
@@ -73,10 +73,10 @@
 			<div class="card border-secondary mb-3" style="max-width: 18rem">
 				<div class="card-header" onmouseover="translateMeLat(this)" onmouseout="translateMeDe(this)">Pollenname</div>
 				<div class="card-body text-secondary">
-					<h6 class="card-title">Time | Pollen per m³</h6>
+					<h6 class="card-title">Zeit | Pollen pro m³</h6>
 					<ul class="list-group">
 						<li id="li1" style="display:none" class="list-group-item d-flex justify-content-between align-items-center">
-						<span>Total</span><span class="badge bg-secondary rounded-pill">14</span>
+						<span>Gesamt</span><span class="badge bg-secondary rounded-pill">14</span>
 						</li>
 					</ul>
 				</div>

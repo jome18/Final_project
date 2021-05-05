@@ -63,8 +63,8 @@ function translateMeDe(item) {
 
 function translatePolle(name, direction) {
 	var latName = ["Abies","Acer","Aesculus","Alnus","Ambrosia","Artemisia","Asteraceae","Betula","Carpinus","Castanea","Chenopodium","Corylus","Cruciferae","Cyperaceae","Erica","Fagus","Fraxinus","Fungus","Galium","Humulus","Impatiens","Juglans","Larix","Picea","Pinaceae","Pinus","Plantago","Platanus","Poaceae","Populus","Quercus","Quercus ilex","Rumex","Salix","Sambucus","Secale","Taxus","Tilia","Ulmus","Urtica","Varia"];
-	var deName = ["fir","acer","horse chestnut","common alder","ambrosia","mugwort","	composite family","birch","common hornbeam","chestnut","goosefoot","hazel","crucifer","sedge family","heather / erica","beech","ash","fungus","cleavers","hop","impatiens","walnut","larch","spruce","pine family","pine","plantain","plane","sweet grass","poplar","oak","ilex / holly oak","sorrel","willow","elder","rye","yew","linden / lime","elm","nettle","varia"];
-//	var deName = ["Tanne","Ahorn","Rosskastanie","Erle","Ambrosia","Beifuß / Wermut","Korbblütler","Birke","Hainbuche","Kastanie","Gänsefüße","Hasel","Kreuzblütler","Sauergrasgewächse","Heidekräuter","Buche","Esche","Pilze","Labkräuter","Hopfen","Fleißige Lieschen","Walnuss","Lärche","Fichte","Kieferngewächse","Kiefer","Wegeriche","Platane","Süßgräser","Pappel","Eiche","Steineiche","Ampfer","Weide","Holunder","Roggen","Eibe","Linde","Ulme","Brennessel","Varia"];
+//	var deName = ["fir","acer","horse chestnut","common alder","ambrosia","mugwort","	composite family","birch","common hornbeam","chestnut","goosefoot","hazel","crucifer","sedge family","heather / erica","beech","ash","fungus","cleavers","hop","impatiens","walnut","larch","spruce","pine family","pine","plantain","plane","sweet grass","poplar","oak","ilex / holly oak","sorrel","willow","elder","rye","yew","linden / lime","elm","nettle","varia"];
+	var deName = ["Tanne","Ahorn","Rosskastanie","Erle","Ambrosia","Beifuß / Wermut","Korbblütler","Birke","Hainbuche","Kastanie","Gänsefüße","Hasel","Kreuzblütler","Sauergrasgewächse","Heidekräuter","Buche","Esche","Pilze","Labkräuter","Hopfen","Fleißige Lieschen","Walnuss","Lärche","Fichte","Kieferngewächse","Kiefer","Wegeriche","Platane","Süßgräser","Pappel","Eiche","Steineiche","Ampfer","Weide","Holunder","Roggen","Eibe","Linde","Ulme","Brennessel","Varia"];
 	if (direction == "ld") {
 		if (latName.indexOf(name) !== -1) {
 			return deName[latName.indexOf(name)];
@@ -77,6 +77,7 @@ function translatePolle(name, direction) {
 	return false;
 }
 
+/*
 function translateFeeling(name){
 	categories = {
 	  'SS': 'Sehr Schlecht',
@@ -91,9 +92,9 @@ function translateFeeling(name){
 	  }
 	return name;
   }
+*/
 
 
-/*
 function translateFeeling(name){
 	categories = {
 	  'SS': 'Sehr Schlecht',
@@ -108,4 +109,4 @@ function translateFeeling(name){
 	  }
 	return name;
   }
-*/  
+
