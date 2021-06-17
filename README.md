@@ -1,4 +1,5 @@
 The use case of AllergoBuster5000:
+Install Django Framework for Python!
 
 - the user does not know, if he is allergic to any kind of grass or tree pollen;
 - the app allows him to daily monitor pollen flight and evaluate each day and pollen count by personal feeling;
